@@ -42,3 +42,47 @@ There are a few more endpoints available for testing purposes:
 * `DELETE: /api/charge/{id}` To delete a specific game charge by `id`.
 * `GET: /api/charge/all/{id}/{date}` To get all game charges of a specific `date` for a specific customer `id`.
 * `POST: /api/charge/create/{count}/{date}` To create a `count` of game charges for ALL customers at once. The `count` is randomised for every customer in the range of `[0..count)`. The game for each charge is also randomised. There are a total of `10` hardcoded games in this solution.
+
+
+### Database
+
+To make sure you have the same database tables please use the following script:
+
+```
+USE [WebAPI.Models.AppDatabaseContext]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Customers] (
+    [Id]           BIGINT         IDENTITY (1, 1) NOT NULL,
+    [Name]         NVARCHAR (MAX) NOT NULL,
+    [RegisterDate] DATETIME2 (7)  NOT NULL
+);
+
+CREATE TABLE [dbo].[GameCharges] (
+    [Id]         BIGINT         IDENTITY (1, 1) NOT NULL,
+    [Cost]       BIGINT         NOT NULL,
+    [ChargeDate] DATETIME2 (7)  NOT NULL,
+    [GameId]     BIGINT         NOT NULL,
+    [GameName]   NVARCHAR (MAX) NOT NULL,
+    [CustomerId] BIGINT         NOT NULL
+);
+
+GO
+CREATE NONCLUSTERED INDEX [IX_GameCharges_CustomerId_ChargeDate_GameId]
+    ON [dbo].[GameCharges]([CustomerId] ASC, [ChargeDate] DESC, [GameId] ASC);
+
+GO
+ALTER TABLE [dbo].[GameCharges]
+    ADD CONSTRAINT [PK_GameCharges] PRIMARY KEY CLUSTERED ([Id] ASC);
+
+GO
+ALTER TABLE [dbo].[GameCharges]
+    ADD CONSTRAINT [FK_GameCharges_Customers_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customers] ([Id]) ON DELETE CASCADE;
+
+```
