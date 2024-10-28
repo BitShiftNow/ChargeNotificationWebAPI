@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using WebAPI.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebAPI.Services.Data;
 
@@ -26,6 +23,13 @@ public interface ICustomerDataProvider {
 
 /// <summary>
 /// The <see cref="ICustomerDataProvider"/> implementation.
+/// 
+/// This is essentially the main link to the database and where all queries are performed.
+/// This means I do not need to pass the <see cref="CustomerDbContext"/> around directly,
+/// but it also means I need to provide a lot of specialised methods to fetch specific things.
+/// 
+/// After using it, and now finalizing it, I am not too happy with this approach
+/// and probably would just use the CustomerDbContext directly. Or rather a <see cref="IDbContextFactory{CustomerDbContext}"/>.
 /// </summary>
 public class CustomerDataProvider : ICustomerDataProvider {
     private readonly IDbContextFactory<CustomerDbContext> db_context_factory;

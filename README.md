@@ -20,11 +20,14 @@ To generate charge notifications for ALL customers for a specific day POST the r
 
 ```
 "ChargeNotificationOptions": {
-    "DocumentOutputDirectory": "C:\\Users\\micro\\Projects\\ChargeNotification\\WebAPI\\"
+    "DocumentOutputDirectory": "C:\\Users\\micro\\Projects\\ChargeNotification\\WebAPI\\",
+    "DocumentTemplateFilename": "C:\\Users\\micro\\Projects\\ChargeNotification\\WebAPI\\template.xml"
 }
 ```
 
-`/api/notification/{date}` will return an `id` which can be used to track the status of the document generation via `/api/notification/{id}`. This will either return a `404 - Not Found` if the generation process is still in progress (or invalid), or a timestamp of the total runtime once the generation process has concluded.
+The `DocumentTemplateFilename` in the settings file points to a required `XML` template file that describes how the output document needs to look like.
+
+`/api/notification/{date}` will return an `id` which can be used to track the status of the document generation via `/api/notification/{id}`. This will either return a `404 - Not Found` if the generation process is still in progress (or invalid), or a timestamp of the total runtime once the generation process has concluded. Sadly the server gets kind of hammered when processing the charge requests and the `/api/notification/{id}` seems to be taking a very long time to respond. My experience with ASP.NET Core is too little to know exactly that caused this and I couldn't figure it out during my time working on this challenge. I am sure I would be able to fix it eventually but for now, it is what it is.
 
 `/api/notification/{id}/{date}` can be used to generate charge notification documents for a specific user `id`. However, this process is not tracked so you can not poll the generation status. It does however complete quite quickly anyways and will store the PDFs in the same configured `DocumentOutputDirectory`.
 

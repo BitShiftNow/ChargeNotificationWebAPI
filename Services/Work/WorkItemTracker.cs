@@ -17,6 +17,9 @@ public interface IWorkItemTracker : IWorkItemStatusChecker {
     void AddCompletedItem(IWorkItem item);
 }
 
+/// <summary>
+/// Used to track in-progress items.
+/// </summary>
 public class WorkItemTracker : IWorkItemTracker {
     private readonly ConcurrentDictionary<long, TimeSpan> completed = new();
 

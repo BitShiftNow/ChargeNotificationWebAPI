@@ -9,6 +9,12 @@ namespace WebAPI.Services.Data.Document;
 /// <summary>
 /// The charge notificiation PDF document template.
 /// To create an instance of this template use the <see cref="IOutputDocumentFactory"/>.
+/// 
+/// This was used as the templating engine before I aded the XML template file.
+/// The idea was to provide different IDocument implementations if the template ever needed to change.
+/// 
+/// Now it relies on the <see cref="ChargeDocumentTemplate"/> class that describes in a very crude way on
+/// how the document needs to look like.
 /// </summary>
 public class ChargeNotificationDocument : IDocument {
     private readonly ChargeNotification data;

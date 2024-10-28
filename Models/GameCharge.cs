@@ -17,6 +17,10 @@ public class GameCharge {
     public virtual Customer Customer { get; set; } = null!;
 }
 
+/// <summary>
+/// The game charge DTO used by the APIs.
+/// To translate a GameCharge to a GameChargeDTO you can use the <see cref="Services.Data.Processors.GameChargeDTOProcessor"/>
+/// </summary>
 public class GameChargeDTO {
     public long Number { get; init; }
     public long Cost { get; init; }

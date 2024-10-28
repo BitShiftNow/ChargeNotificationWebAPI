@@ -3,6 +3,9 @@ using WebAPI.Services.Work;
 
 namespace WebAPI.Controllers;
 
+/// <summary>
+/// The controller for the charge notification document generation.
+/// </summary>
 [ApiController]
 [Route("api/notification")]
 public class ChargeNotificationController : Controller {

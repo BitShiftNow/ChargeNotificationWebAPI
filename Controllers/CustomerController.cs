@@ -5,6 +5,9 @@ using WebAPI.Services.Data.Processors;
 
 namespace WebAPI.Controllers;
 
+/// <summary>
+/// The controller to change customer data. This is for testing only really
+/// </summary>
 [ApiController]
 [Route("api/customer")]
 public class CustomerController : ControllerBase {

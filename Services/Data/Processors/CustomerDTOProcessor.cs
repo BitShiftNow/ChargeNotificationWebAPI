@@ -2,6 +2,10 @@
 
 namespace WebAPI.Services.Data.Processors;
 
+/// <summary>
+/// Transforms a <see cref="Customer"/> into a <see cref="CustomerDTO"/>.
+/// This does not apply any business logic.
+/// </summary>
 public class CustomerDTOProcessor : IDataProcessor<Customer?, CustomerDTO?> {
     public CustomerDTO? Process(Customer? input) {
         CustomerDTO? result = null;

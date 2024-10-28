@@ -1,10 +1,6 @@
 ﻿using QuestPDF.Infrastructure;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 using WebAPI.Models;
-using WebAPI.Options;
 using WebAPI.Services.Data.Document.Schema;
-using WebAPI.Services.Data.Document.Template;
 
 namespace WebAPI.Services.Data.Document;
 

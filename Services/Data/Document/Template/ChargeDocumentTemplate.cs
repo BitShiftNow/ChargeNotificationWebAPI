@@ -1,8 +1,10 @@
-﻿using System.Text;
-using System.Xml.Serialization;
-using WebAPI.Models;
+﻿using System.Xml.Serialization;
 
 namespace WebAPI.Services.Data.Document.Schema;
+
+/*
+ * This file contains all the classes for XML serialization.
+ */
 
 public class ChargeDocumentTemplate {
     public Header? Header;

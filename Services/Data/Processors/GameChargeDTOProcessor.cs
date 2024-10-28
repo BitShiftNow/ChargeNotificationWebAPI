@@ -2,6 +2,10 @@
 
 namespace WebAPI.Services.Data.Processors;
 
+/// <summary>
+/// Transforms a <see cref="GameCharge"/> into a <see cref="GameChargeDTO"/>.
+/// This does not apply any business logic.
+/// </summary>
 public class GameChargeDTOProcessor : IDataProcessor<GameCharge?,GameChargeDTO?> {
     public GameChargeDTO? Process(GameCharge? input) {
         GameChargeDTO? result = null;

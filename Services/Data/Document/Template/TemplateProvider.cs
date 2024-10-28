@@ -4,10 +4,18 @@ using WebAPI.Services.Data.Document.Schema;
 
 namespace WebAPI.Services.Data.Document.Template;
 
+/// <summary>
+/// A template provider/factory to get templates for the document generation.
+/// </summary>
 public interface ITemplateProvider {
     ChargeDocumentTemplate ReadChargeDocumentTemplate();
 }
 
+/// <summary>
+/// The default <see cref="ITemplateProvider"/> implementation that creates a 
+/// template from an XML file at the configured location.
+/// See <see cref="ChargeNotificationOptions.DocumentTemplateFilename"/>.
+/// </summary>
 public class TemplateProvider : ITemplateProvider {
     private readonly ChargeNotificationOptions options;
 

@@ -5,13 +5,7 @@ namespace WebAPI.Services.Work;
 /// <summary>
 /// A work item factory to create specific instances of <see cref="IWorkItem"/> objects.
 /// </summary>
-public interface IWorkItemFactory
-{
-    /// <summary>
-    /// Creates a <see cref="AsyncFuncWorkItem"/> instance.
-    /// </summary>
-    IWorkItem FromAsyncFunc(Func<CancellationToken, Task> async_func);
-
+public interface IWorkItemFactory {
     /// <summary>
     /// Creates a <see cref="CustomerChargeNotificationWorkItem"/> instance.
     /// </summary>
@@ -21,11 +15,6 @@ public interface IWorkItemFactory
     /// Creates a <see cref="AllChargeNotificationsWorkItem"/> instance.
     /// </summary>
     IWorkItem AllChargeNotifications(DateTime date);
-
-    /// <summary>
-    /// A work item that will set itself as completed once it has gone through the queue.
-    /// </summary>
-    IWorkItem CompletionWorkItem(IWorkItem item);
 }
 
 /// <summary>
@@ -44,18 +33,13 @@ public class WorkItemFactory : IWorkItemFactory {
 
     private WorkItemContext CreateContext() => new(GetNextId(), services);
 
-    public IWorkItem FromAsyncFunc(Func<CancellationToken, Task> async_func)
-        => new AsyncFuncWorkItem(CreateContext(), async_func);
-
     public IWorkItem CustomerChargeNotification(long customer_id, DateTime date)
         => new CustomerChargeNotificationWorkItem(CreateContext(), customer_id, date);
 
     public IWorkItem AllChargeNotifications(DateTime date)
         => new AllChargeNotificationsWorkItem2(CreateContext(), date);
-        //=> new AllChargeNotificationsWorkItem(CreateContext(), date);
-
-    public IWorkItem CompletionWorkItem(IWorkItem item)
-        => new CompletionWorkItem(CreateContext(), item);
+    //=> new AllChargeNotificationsWorkItem(CreateContext(), date);
+    // NOTE: Version 1 was super slow (which after thinking about it... no surprise really) because it hammered the database with queries
 }
 
 public static class WorkItemFactoryExtensions {
