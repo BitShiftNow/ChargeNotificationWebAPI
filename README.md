@@ -1,6 +1,6 @@
-# PayPoint - Charge Notifiation Generator
+# Charge Notifiation Generator
 
-Dani Drywa's solution to the PayPoint Charge Notification homework.
+Dani Drywa's solution to the Charge Notification homework.
 
 
 ## Info
